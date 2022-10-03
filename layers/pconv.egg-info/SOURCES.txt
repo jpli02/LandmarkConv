@@ -1,0 +1,11 @@
+setup.py
+/p300/mmseg/lib_g2/layers/csrc/vision.cpp
+/p300/mmseg/lib_g2/layers/csrc/avgpool/aconv4.cu
+/p300/mmseg/lib_g2/layers/csrc/conv4/conv4.cu
+/p300/mmseg/lib_g2/layers/csrc/conv8/conv8.cu
+/p300/mmseg/lib_g2/layers/csrc/gconv4/gconv4.cu
+/p300/mmseg/lib_g2/layers/csrc/maxlen/maxlen.cu
+pconv.egg-info/PKG-INFO
+pconv.egg-info/SOURCES.txt
+pconv.egg-info/dependency_links.txt
+pconv.egg-info/top_level.txt

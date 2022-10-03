@@ -1,0 +1,7 @@
+# ninja log v5
+4	28864	0	/p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/vision.o	327c400e7bc2070c
+6	63455	0	/p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/gconv4/gconv4.o	78ae95d90c30c2bb
+5	64051	0	/p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/conv4/conv4.o	414717ee5058699
+7	64257	0	/p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/maxlen/maxlen.o	90ad60d5056533df
+5	69026	0	/p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/conv8/conv8.o	a889279cdba03101
+6	70096	0	/p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/avgpool/aconv4.o	65abbb8c8f6ba643

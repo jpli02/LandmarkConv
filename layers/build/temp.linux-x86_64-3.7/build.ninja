@@ -1,0 +1,31 @@
+ninja_required_version = 1.3
+cxx = c++
+nvcc = /usr/local/cuda/bin/nvcc
+
+cflags = -pthread -B /root/Anacondas/anaconda3/envs/mmseg/compiler_compat -Wl,--sysroot=/ -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall -Wstrict-prototypes -fPIC -DWITH_CUDA -I/p300/mmseg/lib_g2/layers/csrc -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include/torch/csrc/api/include -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include/TH -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include/THC -I/usr/local/cuda/include -I/root/Anacondas/anaconda3/envs/mmseg/include/python3.7m -c
+post_cflags = -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++14
+cuda_cflags = -DWITH_CUDA -I/p300/mmseg/lib_g2/layers/csrc -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include/torch/csrc/api/include -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include/TH -I/root/Anacondas/anaconda3/envs/mmseg/lib/python3.7/site-packages/torch/include/THC -I/usr/local/cuda/include -I/root/Anacondas/anaconda3/envs/mmseg/include/python3.7m -c
+cuda_post_cflags = -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -DCUDA_HOST_COMPILER=/usr/bin/gcc5 -gencode arch=compute_50,code=sm_50 -gencode arch=compute_52,code=sm_52 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_61,code=sm_61 -gencode arch=compute_70,code=sm_70 -DTORCH_API_INCLUDE_EXTENSION_H -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++14
+ldflags = 
+
+rule compile
+  command = $cxx -MMD -MF $out.d $cflags -c $in -o $out $post_cflags
+  depfile = $out.d
+  deps = gcc
+
+rule cuda_compile
+  command = $nvcc $cuda_cflags -c $in -o $out $cuda_post_cflags
+
+
+
+build /p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/vision.o: compile /p300/mmseg/lib_g2/layers/csrc/vision.cpp
+build /p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/conv4/conv4.o: cuda_compile /p300/mmseg/lib_g2/layers/csrc/conv4/conv4.cu
+build /p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/conv8/conv8.o: cuda_compile /p300/mmseg/lib_g2/layers/csrc/conv8/conv8.cu
+build /p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/avgpool/aconv4.o: cuda_compile /p300/mmseg/lib_g2/layers/csrc/avgpool/aconv4.cu
+build /p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/gconv4/gconv4.o: cuda_compile /p300/mmseg/lib_g2/layers/csrc/gconv4/gconv4.cu
+build /p300/mmseg/lib_g2/layers/build/temp.linux-x86_64-3.7/p300/mmseg/lib_g2/layers/csrc/maxlen/maxlen.o: cuda_compile /p300/mmseg/lib_g2/layers/csrc/maxlen/maxlen.cu
+
+
+
+
+
